@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+
+    <style>
+        body {
+            background-color: #FEA600;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: white;
+        }
+
+        .stopwatch {
+            margin: 60px;
+            text-align: center;
+        }
+
+        .btns {
+            text-align: center;
+        }
+
+        button {
+            font-size: 2rem;
+            margin: 0 30px;
+            width: 25%;
+            height: 110px;
+            background-color: #FEA600;
+            border: 3px white solid;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>STOPWATCH</h1>
+        <h1>VANILLA JAVASCRIP STOPWATCH</h1>
+    </header>
+
+    <div class="stopwatch">
+        <h1 id="counter">00:00</h1>
+    </div>
+    <div class="btns">
+        <button id="strtBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+
+    <script>
+        let counterDOM = document.getElementById("counter")
+        let startDOM = document.getElementById("strtBtn");
+        let stopDOM = document.getElementById("stopBtn")
+        let restDOM = document.getElementById("resetBtn")
+
+        var counter = 0;
+        var secOnluk = 0;
+        var min = 0;
+        var minOn = 0;
+
+        var timer;
+
+        startDOM.onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(startTimer, 10)
+        }
+       
+            
+            function startTimer() {
+                counter++;
+                if (counter === 9) {
+                    secOnluk++;
+                    counter = 0;
+                }
+                if (secOnluk === 9) {
+                    min++;
+                    secOnluk = 0;
+                }
+                if (min === 9) {
+                    minOn++;
+                    min = 0;
+                }
+                counterDOM.textContent = `${minOn}${min}:${secOnluk}${counter}`
+
+                //STOP BUTTON
+                stopDOM.addEventListener("click", () => {
+                    clearInterval(timer);
+                })
+                //RESET BUTTON
+                restDOM.addEventListener("click", () => {
+                    clearInterval(timer);
+                    counter = 0;
+                    secOnluk = 0;
+                    min = 0;
+                    minOn = 0;
+                    counterDOM.textContent = `${minOn}${min}:${secOnluk}${counter}`
+                })
+            }
+            
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
